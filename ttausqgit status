@@ -1,0 +1,1479 @@
+[33mcommit 5b72cc9c104c36a440501442a492caed94ecd36c[m[33m ([m[1;36mHEAD -> [m[1;32mshinka[m[33m, [m[1;31morigin/shinka[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: ezio84 <brabus84@gmail.com>
+Date:   Fri Dec 3 19:51:29 2021 +0530
+
+    base: Add API for disabling gestural navigation
+    
+    Author: Pranav Vashi <neobuddy89@gmail.com>
+    Date:   Wed Mar 23 18:40:00 2022 +0530
+    
+        base: Update API for disabling gestural navigation
+    
+    Signed-off-by: Pranav Vashi <neobuddy89@gmail.com>
+    Change-Id: I0174ff0e8a30f0ef2b54c1f61145a575b844ad72
+
+[33mcommit 2ac88ad5b34162f091326698b87145a671e5e7f4[m
+Author: ezio84 <brabus84@gmail.com>
+Date:   Thu Feb 1 16:49:32 2018 +0100
+
+    base: Add api to force show led lights
+    
+    We can use this to show a led color preview when using the
+    color picker, or any other stuff.
+    
+    use -1 as color int to switch off
+    
+    Change-Id: Id59f480e74a30a875c6640fdfc2e746d98a8513c
+    
+    Led light preview: switch led off before changing the color
+    
+    on some devices this can avoid glitches
+    
+    Change-Id: I4ef51d6b074e344d48f4a814549db2dad9ef9d0a
+
+[33mcommit 8d4a582ad5034e6f916a410febe64a33ff7867e3[m
+Author: Akash Srivastava <akashniki@gmail.com>
+Date:   Mon May 9 10:02:49 2022 +0000
+
+    SystemUI: Fix square icon in per app volume
+    
+    * looks weirdo with our vol panel style
+    
+    Signed-off-by: clhex <clhexftw@protonmail.com>
+
+[33mcommit e0b022d85dd6272d94d0d4bc90aefe5c84c7fdfd[m
+Author: acras01 <acras1@gmail.com>
+Date:   Fri Nov 12 08:14:16 2021 +0200
+
+    SystemUI: Allow toggling combined signal icons [1/2]
+    
+    * @jhonboy121: Use the feature flag as a default value, otherwise there is no point in having a "toggle" if the feature flag is not enabled
+    
+    idoybh (YAAP): Add to the backup array, Adapt to Sv2
+    
+    Change-Id: If869fe31e43f198c4ced8e872c5c060a524f6462
+
+[33mcommit 25ec59649419bdecf999a90e3d65f61cefb88142[m
+Author: Jon Haus <haus.xda@gmail.com>
+Date:   Thu Jan 5 00:20:06 2017 +0100
+
+    [SQUASH] base: Network Traffic [1/2]
+    
+    -----
+    abc ezio84:
+    use O darkintensity api
+    use arrows vectors from aosp net arrows commit (thanks @Mazda-- for this find!): https://github.com/ezio84/abc_frameworks_base/commit/ad71ae1fd09f9a7392ab2eba7b766c8b088319b4
+    fix visual glitch on statusbar expand (arrows showing and quickly hiding again)
+    don't show arrows when no data
+    remove unit settings (KB is good)
+    remove interval (set to 1sec by def) and single arrow options
+    don't get settings values again when not needed
+    fix padding between arrows and speed values and expose the padding value
+    code cleanup
+    -----
+    
+    Change-Id: I026f67caec69a09c0c1969a09fbe99aa6b6f0510
+    Signed-off-by: Anushek Prasal <anushekprasal@gmail.com>
+    Signed-off-by: PainKiller3 <ninadpatil100@gmail.com>
+    
+    -----
+    
+    Statusbar net monitor: stop the handler if screen is off
+    
+    no need to keep the net monitor working if screen is off
+    and waste system / battery resources
+    
+    Change-Id: I977eee3b38d19a755b9e9a0b38c13e86aea433c5
+    Signed-off-by: Anushek Prasal <anushekprasal@gmail.com>
+    Signed-off-by: PainKiller3 <ninadpatil100@gmail.com>
+    
+    -----
+    
+    base: Move net monitor to expanded statusbar header
+    
+    Preview: https://i.ibb.co/1TCCwV8/455010636-14778.jpg
+    
+    Actually, with notch or low dpi and more statusbar icons we have not so
+    much space there to show the net monitor.
+    A notch can hide it and the system can now handle only a fixed max number of
+    notifications and status icons, so when net monitor shows itself it can force
+    the system to drop some icons to show the infamous dot.
+    
+    Let's also consider we usually check the monitor to see if the data
+    transfer is working as expected and the speed is proper, so it's not
+    an info we want to see always (it's also distracting when reading
+    something).
+    
+    So, let's move it to expanded statusbar.
+    There we have also some room to add line spacing and more info.
+    
+    Change-Id: I3fca786aec4f27c763e70d404448bd71dfaecceb
+    Signed-off-by: Anushek Prasal <anushekprasal@gmail.com>
+    Signed-off-by: PainKiller3 <ninadpatil100@gmail.com>
+    
+    -----
+    
+    Net monitor: fix text color on light theme
+    
+    Change-Id: I5c4d7a3c5fdc626fe8b34c88212ed01154b3ab65
+    Signed-off-by: Anushek Prasal <anushekprasal@gmail.com>
+    Signed-off-by: PainKiller3 <ninadpatil100@gmail.com>
+    
+    -----
+    
+    Network traffic: fix indicator not hiding on lost connection
+    
+    With https://gerrit.aicp-rom.com/c/AICP/frameworks_base/+/80636
+    ("Statusbar net monitor: stop the handler if screen is off"),
+    connectivity status can change without us noticing, so let's update in
+    updateSettings() (which is called after turning the screen on) also if
+    there is no connection.
+    
+    Change-Id: I674f9cc3946f679b1ff9696079c5608fdfaa12d7
+    Signed-off-by: Anushek Prasal <anushekprasal@gmail.com>
+    Signed-off-by: PainKiller3 <ninadpatil100@gmail.com>
+    
+    -----
+    
+    Network Traffic: Bring back traffic indicator for all
+    
+    Change-Id: Ia41474a262b258f8a2d4d7b10a15891729ffd17c
+    Signed-off-by: Anushek Prasal <anushekprasal@gmail.com>
+    Signed-off-by: PainKiller3 <ninadpatil100@gmail.com>
+    
+    -----
+    
+    Network Traffic: Move network indicator to the right
+    
+    singleLine is deprecated use maxLines instead
+    Follow system font
+    
+    Change-Id: Ib739bdca613be43411a0822bbee86013c48e2bd7
+    Signed-off-by: Anushek Prasal <anushekprasal@gmail.com>
+    Signed-off-by: PainKiller3 <ninadpatil100@gmail.com>
+    
+    -----
+    
+    Network Traffic: OOS style network traffic indicator
+    
+    - add separate dimens. values for SBtraffic
+    - adjust size and alignment
+    - reduce left right padding
+    - make traffic text bold/font
+    - set gravity to right
+    - nuked arrow indicators
+    - upload and download speeds view switch depending on which is higher
+    
+    Change-Id: I48a16dc383ce333f0a64aa87b994d300b26e6a9c
+    Signed-off-by: Anushek Prasal <anushekprasal@gmail.com>
+    Signed-off-by: PainKiller3 <ninadpatil100@gmail.com>
+    
+    -----
+    
+    Network Traffic: Refactor text formatting
+    
+    - Rework the displayed digits logic and convert them to spannable
+      strings for better individual refinement of digits/unit
+    
+    - Get rid of the text size dimen as there's no need of it anymore
+    
+    **DU Edits**
+    - Do to one what you do to the other. Apply the same changes to both classes,
+    statusbar and extended statusbar.
+    
+    Change-Id: I7c7161460236bbc83ee530adf7c73fb9d592b3c6
+    Signed-off-by: Anushek Prasal <anushekprasal@gmail.com>
+    Signed-off-by: PainKiller3 <ninadpatil100@gmail.com>
+    
+    -----
+    
+    Network Traffic: Adjust size/text style for extended statusbar
+    
+    Change-Id: I851dac6279e0b4a60b1697ce1bd6f85fc3e248b9
+    Signed-off-by: Anushek Prasal <anushekprasal@gmail.com>
+    Signed-off-by: PainKiller3 <ninadpatil100@gmail.com>
+    
+    -----
+    
+    Traffic indicators: code cleanup and improvements
+    
+    also don't continuosly check if device has notch but do it once
+    
+    Change-Id: I1a97dcd6cb932d32f6bffa518a66a47a209c604e
+    Signed-off-by: Anushek Prasal <anushekprasal@gmail.com>
+    Signed-off-by: PainKiller3 <ninadpatil100@gmail.com>
+    
+    -----
+    
+    Traffic indicators: use smaller and bold fonts in expanded statusbar
+    
+    Change-Id: I7d9dd2fe7850ec6f27707022fc8e4fd3cf85dfd1
+    Signed-off-by: Anushek Prasal <anushekprasal@gmail.com>
+    Signed-off-by: PainKiller3 <ninadpatil100@gmail.com>
+    
+    -----
+    
+    Traffic indicators: add properly to statusbar icons
+    
+    Make it behave fine on devices that don't have much status bar space
+    (e.g. because of a display cutout/"notch")
+    
+    duabc: adapt to our code
+    
+    Change-Id: I541e2430e2075d8dc650829d5e90039628799a15
+    Signed-off-by: Anushek Prasal <anushekprasal@gmail.com>
+    Signed-off-by: PainKiller3 <ninadpatil100@gmail.com>
+    
+    -----
+    
+    Traffic indicators: hide in the keyguard
+    
+    There's no fucking reason for these traffic indicators to be showing in
+    the keyguard. Who does that? Nobody....that's who lol
+    
+    Change-Id: Ie7f8cfbbf787d3096094c31daa6feff0e305a687
+    Signed-off-by: Anushek Prasal <anushekprasal@gmail.com>
+    Signed-off-by: PainKiller3 <ninadpatil100@gmail.com>
+    
+    -----
+    
+    Traffic indicators: don't show two instances in expanded statusbar
+    
+    we keep the one on top right of the screen (there we have more space
+    and in the future can add more net traffic info)
+    
+    Change-Id: I098c93b9dd0edd146d08fd23c8c721274b9859ec
+    Signed-off-by: Anushek Prasal <anushekprasal@gmail.com>
+    Signed-off-by: PainKiller3 <ninadpatil100@gmail.com>
+    
+    -----
+    
+    Traffic indicators: Prevent logspam caused by improperly calling requestLayout()
+    
+    Simple as that. Improperly calling requestLayout() was causing ViewRootImpl spam
+    the living crap out of us.
+    
+    https://github.com/DirtyUnicorns/android_frameworks_base/blob/q10x/core/java/android/view/ViewRootImpl.java#L3178
+    
+    Change-Id: Ia7f20be9e31508ab5188ceeaeb83716ab6548d02
+    Signed-off-by: Anushek Prasal <anushekprasal@gmail.com>
+    Signed-off-by: PainKiller3 <ninadpatil100@gmail.com>
+    
+    -----
+    
+    Network Traffic: remove statusbar animation
+    
+    Change-Id: Ice77d6517329c0f77ec2e664580d976f1de95c9f
+    TODO: find a proper way in StatusIconContainer
+    Signed-off-by: Anushek Prasal <anushekprasal@gmail.com>
+    Signed-off-by: PainKiller3 <ninadpatil100@gmail.com>
+    
+    -----
+    
+    SystemUI: Improve Network Traffic
+    
+    Signed-off-by: Anushek Prasal <anushekprasal@gmail.com>
+    Change-Id: Ic5a17979f9adbe761c8c5e3d5130004a90430daf
+    Signed-off-by: PainKiller3 <ninadpatil100@gmail.com>
+    
+    -----
+    
+    Network Traffic: Customize refresh interval [1/2]
+    
+    Change-Id: Ica432e43e4eaab2c54aa9154389e8097d14eb6bc
+    Signed-off-by: Pranav Vashi <neobuddy89@gmail.com>
+    Signed-off-by: Anushek Prasal <anushekprasal@gmail.com>
+    Signed-off-by: PainKiller3 <ninadpatil100@gmail.com>
+    
+    -----
+    
+    Network Traffic: Allow to choose display mode [1/2]
+    
+    Signed-off-by: Anushek Prasal <anushekprasal@gmail.com>
+    Signed-off-by: PainKiller3 <ninadpatil100@gmail.com>
+    Change-Id: I92ca064bb1af9051074f0e95df83a495ecf0d8b8
+    
+    -----
+    
+    base: Avoid casting network traffic to StatusBarIconView to prevent crash
+    
+    Change-Id: I5e32b57ddfecf80390eb14429ab3f7d510b10dbd
+    Signed-off-by: Anushek Prasal <anushekprasal@gmail.com>
+    Signed-off-by: PainKiller3 <ninadpatil100@gmail.com>
+    
+    -----
+    
+    StatusBarIconController: Avoid cast exceptions
+    
+    Same reasoning as 37c817c95c0ea316711ced9e5fc455939089fa3c
+    
+    Signed-off-by: Harsh Shandilya <msfjarvis@gmail.com>
+    Change-Id: If10f30c6d5965554a73752b87c37eadd22de047c
+    Signed-off-by: Anushek Prasal <anushekprasal@gmail.com>
+    Signed-off-by: PainKiller3 <ninadpatil100@gmail.com>
+    
+    -----
+    
+    NetworkTraffic: Fix speed format for 10*KB
+    
+    Change-Id: I86153e8a5a314f0f44b02500878b68970a070155
+    Signed-off-by: Anushek Prasal <anushekprasal@gmail.com>
+    Signed-off-by: PainKiller3 <ninadpatil100@gmail.com>
+    
+    -----
+    
+    StatubarIconList: Fix Network traffic visibility on overlayChange()
+    
+    Signed-off-by: Varun Date <date.varun123@gmail.com>
+    Change-Id: I165d5bdef86f67bec9495517b338159a2fcd43d9
+    Signed-off-by: Anushek Prasal <anushekprasal@gmail.com>
+    Signed-off-by: PainKiller3 <ninadpatil100@gmail.com>
+    
+    -----
+    
+    NetworkTraffic: Remove screen on/off triggers
+    
+    * ANR points here.
+    
+    Signed-off-by: Pranav Vashi <neobuddy89@gmail.com>
+    Signed-off-by: Anushek Prasal <anushekprasal@gmail.com>
+    Signed-off-by: PainKiller3 <ninadpatil100@gmail.com>
+    Change-Id: I03a2279243f104780a1a4777029315f30cf882e9
+    
+    -----
+    
+    NetworkTrafficSB: Better workaround for RequestLayout() spam
+    
+    * Remove updateVisibility() call from setVisibleState()
+    
+    Signed-off-by: Anushek Prasal <anushekprasal@gmail.com>
+    Change-Id: Ic463b787ae01462e23a85b4927d6c7b3d974659e
+    Signed-off-by: Anushek Prasal <anushekprasal@gmail.com>
+    Signed-off-by: PainKiller3 <ninadpatil100@gmail.com>
+    
+    -----
+    
+    SystemUI: Move NetworkTraffic in QS header
+    
+    This way it'll always keep distance from statusbar items & privacy chip
+    May rework the UI further in the future
+    
+    Change-Id: Icacc9dd877464261dc2f9f9367142d37c644804e
+    
+    -----
+    
+    SystemUI: Fix NetworkTraffic UI on expanded QS
+    
+    Views are always there, they just animate alpha.
+    Let's include netwrok traffic so it'll only be visible when expanded
+    Correctly handle text tint while at it
+    
+    Change-Id: I2f31c48cdc155a63ab5f658a4adf41f029b4cf2c
+    
+    -----
+    
+    SystemUI: NetworkTraffic: Minor refinements
+    
+    - remove unwanted padding on top of expanded statusbar
+      traffic indicator and center it properly
+    - reduce side padding of statusbar indicator
+    - reduce overall text size and increase line spacing
+    
+    Change-Id: Ifc3fb95edb54d05ef1770e252fa816897c3c230b
+    
+    -----
+    
+    SystemUI: Reduce statusbar network speed margins
+    
+    Change-Id: I449ec479ca8732af2d6a13375f12af600b170181
+    
+    -----
+    
+    SystemUI: Network Traffic: Stop scheduling updates when screen off
+    
+    * Fixes battery drain.
+    
+    Partially revert "NetworkTraffic: Remove screen on/off triggers"
+    
+    This partially reverts commit 0a635802f136baa5d3861276997d5d557c4b70d4.
+    
+    -----
+    
+    base: Fix net traffic view being white on QQS Header
+    
+    Signed-off-by: SagarMakhar <sagarmakhar@gmail.com>
+    Signed-off-by: Genkzsz11 <genkzsz11@gmail.com>
+    Change-Id: I4f8ac1a22d1648461648174fa8725ec24e96efb0
+    Co-authored-by: ezio84 <brabus84@gmail.com>
+    Co-authored-by: SpiritCroc <dev@spiritcroc.de>
+    Co-authored-by: Alex <du.alexcruz@gmail.com>
+    Co-authored-by: Michele Bono <bono.michele94@gmail.com>
+    Co-authored-by: ganeshi4u <ganeshvarma@arrowos.net>
+    Co-authored-by: eyosen <abittin@gmail.com>
+    Co-authored-by: SKULSHADY <anushekprasal@gmail.com>
+    Co-authored-by: neobuddy89 <neobuddy89@gmail.com>
+    Co-authored-by: msfjarvis <me@msfjarvis.dev>
+    Co-authored-by: varund7726 <date.varun123@gmail.com>
+    Co-authored-by: gj86 <gobinda.joy@gmail.com>
+    Co-authored-by: idoybh <idoybh2@gmail.com>
+    Co-authored-by: ghostrider-reborn <gh0strider.2k18.reborn@gmail.com>
+    Co-authored-by: SagarMakhar <sagarmakhar@gmail.com>
+    Co-authored-by: timjosten <timjosten@gmail.com>
+
+[33mcommit e3fe95cdc7c2b646e1a8aeb93722ebaaee3d11ac[m
+Author: cjybyjk <cjybyjk@zjnu.edu.cn>
+Date:   Wed Feb 2 23:52:39 2022 +0800
+
+    base: Add support for per-app volume [2/3]
+    
+    [ghostrider-reborn]
+    - Use app volume icon by amartya (@ yukiscape)
+    
+    Change-Id: I674cda1d7463b3603ccaac673178aeead4093619
+    Co-authored-by: yukiscape <garikapatiamartya@gmail.com>
+    Signed-off-by: chrisw444 <wandersonrodriguesf1@gmail.com>
+    Signed-off-by: Adithya R <gh0strider.2k18.reborn@gmail.com>
+
+[33mcommit 12a5d52a124075eb52616c9829a9503b14009c9a[m
+Author: Sarthak Roy <sarthakroy2002@gmail.com>
+Date:   Sun Jul 3 09:46:35 2022 +0000
+
+    Keyguard: Use OppoSans for lockscreen clock
+    
+    - Imported OppoSans from https://github.com/ArrowOS/android_vendor_arrow/commit/9d7a6e3620eb7c6dcd0a2b8a226f0b131cdf1b98
+    - Based on https://github.com/CipherOS/android_frameworks_base/commit/0c9164309b72bdc5536abe8e118604d8ee2fe2b3
+    
+    Co-authored-by: Ratoriku <a1063021545@gmail.com>
+    Co-authored-by: spkal01 <kalligeross@gmail.com>
+    Co-authored-by: Daniel J. Chittoor <djchittoor47@gmail.com>
+    Signed-off-by: Sarthak Roy <sarthakroy2002@gmail.com>
+
+[33mcommit 5efaca86ecb4516b0ea91171431c1c3daf6c904b[m
+Author: AndroidRul3z <ferrettidario@gmail.com>
+Date:   Sun Nov 9 18:34:05 2014 +0100
+
+    base: Turn off some debugs
+    
+    Change-Id: I36bd0034f6a0d7e674e97152ac35ec1961718527
+
+[33mcommit e10a6acae52aec148b6077fd5f1f261296ec70ca[m
+Author: Chet Kener <Cl3Kener@gmail.com>
+Date:   Wed Nov 19 16:05:35 2014 -0500
+
+    GpsNetInitiatedHandler: Disable more debugging
+    
+    Change-Id: I1ced2943df0986bcfc0f44d2847e50e393101e82
+    Signed-off-by: Chet Kener <Cl3Kener@gmail.com>
+    Signed-off-by: spezi77 <spezi7713@gmx.net>
+    Signed-off-by: Joey Huab <joey@evolution-x.org>
+
+[33mcommit b99b2e5a4d5b1f2161b5cd70d14347b0c2b6e894[m
+Author: George Zacharia <george.zcharia@gmail.com>
+Date:   Mon Mar 7 19:44:14 2022 +0530
+
+    fwb : Silence some AOSP logspam
+    
+    Change-Id: I967c9bec0fde47fc1da24f498cbabde2a7a5aa9f
+    Signed-off-by: Dmitrii <bankersenator@gmail.com>
+    Signed-off-by: clhex <clhexftw@protonmail.com>
+
+[33mcommit 5ce1ddee73ed46c03eb540be79865a66150e8c4f[m
+Author: minarypenguin <alexfinhart@gmail.com>
+Date:   Fri Jun 17 09:42:58 2022 +0800
+
+    Keyguard: Use Doubleline clock for small clock
+    
+    * AnimatableClockView uses mIsSingleLine check whether to use double line or singleline clock
+    
+    Signed-off-by: minarypenguin <alexfinhart@gmail.com>
+
+[33mcommit 551ac48c7f674f4e223482d8b6e10aa8584547f9[m
+Author: Ido Ben-Hur <idoybh2@gmail.com>
+Date:   Tue Dec 14 22:07:17 2021 +0200
+
+    NavigationBar: Prevent a rare crash
+    
+    Only happens after setup. Add an NPE check
+    
+    Log:
+    E AndroidRuntime: Process: com.android.systemui, PID: 2994
+    E AndroidRuntime: java.lang.NullPointerException: Attempt to invoke virtual method 'void com.android.systemui.navigationbar.NavigationBarView.setAccessibilityButtonState(boolean, boolean)' on a null object reference
+    E AndroidRuntime:        at com.android.systemui.navigationbar.NavigationBar.updateAccessibilityServicesState(NavigationBar.java:1241)
+    E AndroidRuntime:        at com.android.systemui.navigationbar.NavigationBar$$ExternalSyntheticLambda10.onAccessibilityServicesStateChanged(Unknown Source:2)
+    E AndroidRuntime:        at android.view.accessibility.AccessibilityManager$1.lambda$notifyServicesStateChanged$0$AccessibilityManager$1(AccessibilityManager.java:419)
+    E AndroidRuntime:        at android.view.accessibility.AccessibilityManager$1$$ExternalSyntheticLambda0.run(Unknown Source:4)
+    ...
+
+[33mcommit 5848b999aed0baf89e5d48eebb72ba8a057fcc56[m
+Author: Pranav Vashi <neobuddy89@gmail.com>
+Date:   Sun Jul 24 22:19:14 2022 +0530
+
+    GameSpace: Fix issue with multiple users
+    
+    * This fixes issue where gamespace overlay is trigger
+      for second user in game added by first user.
+    
+    Signed-off-by: Pranav Vashi <neobuddy89@gmail.com>
+    Signed-off-by: clhex <clhexftw@protonmail.com>
+
+[33mcommit b04e37edd997b6da2a52968aae2c02366cc41f7c[m
+Author: Pranav Vashi <neobuddy89@gmail.com>
+Date:   Sat Feb 19 18:44:31 2022 +0530
+
+    ThemeUtils: Make it compatible for all targets
+    
+    * Also, sort packages here itself and remove unused function.
+    
+    Signed-off-by: Pranav Vashi <neobuddy89@gmail.com>
+
+[33mcommit 9a5eb3d4c75f8454575b8bb1320dcec2010f783e[m
+Author: jhonboy121 <alfredmathew05@gmail.com>
+Date:   Sat Apr 9 10:01:10 2022 +0530
+
+    ShortcutPackage: do not spam logcat
+    
+    * Certain apps publish dynamic shortcuts without required flags, which is an unexpected behaviour.
+      Since I got quite annoyed with the excessive logspam (since this is in a loop and there are multiple
+      shortcuts like this), instead of logging a full stack trace, just log a warning and be done with it.
+    * Google should fixup / validate the flags before adding dynamic shortcuts (smh)
+    
+    Signed-off-by: jhonboy121 <alfredmathew05@gmail.com>
+    Signed-off-by: Pranav Vashi <neobuddy89@gmail.com>
+
+[33mcommit 36a80866852ad61181a69963f39b95489f69c2a9[m
+Author: jhonboy121 <alfredmathew05@gmail.com>
+Date:   Mon Sep 13 15:17:10 2021 +0530
+
+    base: update keypress sounds from OOS
+    
+    Co-authored-by: Pranav <npv12@iitbbs.ac.in>
+    Signed-off-by: Pranav <npv12@iitbbs.ac.in>
+    Signed-off-by: clhex <clhexftw@protonmail.com>
+
+[33mcommit 73f832f2a3fd8798a09e8afef3b7167eb2502972[m
+Author: sb6596 <shubhamprince111@gmail.com>
+Date:   Sat Dec 25 06:49:59 2021 +0000
+
+    base: Bring back ThemeUtils for Theming
+    
+    Change-Id: I4324e8bc8d7c6d7df1809a1bd3424abf4dfa1306
+    Signed-off-by: Pranav Vashi <neobuddy89@gmail.com>
+    Signed-off-by: clhex <clhexftw@protonmail.com>
+
+[33mcommit fc8537ffb47fd096b1a61a69d9807c73530acdde[m
+Author: SagarMakhar <sagarmakhar@gmail.com>
+Date:   Wed Jan 12 18:32:54 2022 +0000
+
+    base: SystemUI: Add Black theme [1/3]
+    
+    [palaych: Add settings key into backup and validators]
+    
+    Author: Pranav Vashi <neobuddy89@gmail.com>
+    Date:   Sat Apr 16 10:38:36 2022 +0530
+    
+        Fixes and improvements for Black Theme
+    
+        * Add to SettingsObserver for observing toggle behavior.
+        * Apply only with dark theme - looks awful on light mode.
+        * Add configuration listener to reapply theme when dark mode changes.
+    
+        Signed-off-by: Pranav Vashi <neobuddy89@gmail.com>
+    
+    Change-Id: Ib165e7ba0288eaad7a1e3c1109638acdb66fa05c
+    Signed-off-by: SagarMakhar <sagarmakhar@gmail.com>
+    Signed-off-by: Pranav Vashi <neobuddy89@gmail.com>
+
+[33mcommit 80e3fe685e7729735a8ce0fad1eef91e885f45d6[m
+Author: Pranav Vashi <neobuddy89@gmail.com>
+Date:   Thu Jul 21 09:59:55 2022 +0530
+
+    base: fonts: Add regular / light font config
+
+[33mcommit 8d5378a34e9e0edc76ad57c53b71d6cd1433060f[m
+Author: Rasenkai <rasenkai99@gmail.com>
+Date:   Tue Dec 14 14:49:41 2021 +0000
+
+    base: Disable debug
+    
+    * based on commit 3bdf1d550ef6a85245cd3bade3df103b8c9576cd
+    
+    ----
+    git grep -l 'DEBUG = true' | xargs sed -i 's.DEBUG = true.DEBUG = false.g'
+    
+    [@techyminati: Adapt to Sv2 Changes]
+    Signed-off-by: Aryan Sinha <sinha.aryan03@gmail.com>
+
+[33mcommit d848bc5f55a72fcd1640bbecb44fe08b1bcfaf23[m
+Author: Dmitrii <bankersenator@gmail.com>
+Date:   Sun Oct 10 09:30:47 2021 +0000
+
+    fwb: drop some debug
+    
+    Signed-off-by: Dmitrii <bankersenator@gmail.com>
+
+[33mcommit 2d52f9d34acf9d63df0792a9960394f4c872505c[m
+Author: Aryan Sinha <sinha.aryan03@gmail.com>
+Date:   Thu Mar 17 04:06:55 2022 +0000
+
+    base: Drop some debugging
+    
+    Signed-off-by: Aryan Sinha <sinha.aryan03@gmail.com>
+
+[33mcommit 89e8cf25f6f03e3f76eab74469eed9191fa1fab1[m
+Author: dkati <dkatikaridis@gmail.com>
+Date:   Tue Apr 7 14:44:18 2020 +0000
+
+    zygote: Disable debug
+    
+    Signed-off-by: Pranav <npv12@iitbbs.ac.in>
+
+[33mcommit abfbd638cc316f41139a219b995d41beffdbcbd3[m
+Merge: a948dfcff1ef 36980117f330
+Author: Sugakesshaa <83747297+bheatleyyy@users.noreply.github.com>
+Date:   Wed Aug 31 11:30:18 2022 +0800
+
+    Merge branch 'P-404:shinka' into shinka
+
+[33mcommit 36980117f330d59def37cfdab6ecf01fc55f1a03[m
+Merge: 90743488e263 e0900a10cbbb
+Author: Akash Srivastava <akashniki@gmail.com>
+Date:   Fri Aug 12 13:53:51 2022 +0700
+
+    Merge tag 'LA.QSSI.12.0.r1-08500-qssi.0' of https://git.codelinaro.org/clo/la/platform/frameworks/base into HEAD
+
+[33mcommit 90743488e263860aef102c67dff381eee8bc41a6[m
+Author: Adithya R <gh0strider.2k18.reborn@gmail.com>
+Date:   Wed Jul 27 22:40:56 2022 +0530
+
+    SystemUI: Implement sleep for pickup gesture
+    
+    Put the device back to sleep when its lowered after being
+    awoken by raise-to-wake on lockscreen. Stock ROMs do this
+    wherein Xiaomi's pickup sensor reports value 2.
+    
+    Change-Id: I4e86c2ad9edfd4e3341bc3f35aabcb3553253db3
+
+[33mcommit 7bc114cbe39f9e5672acda4c155fb027ed81379b[m
+Author: cjybyjk <cjybyjk@zjnu.edu.cn>
+Date:   Sun Apr 17 12:18:52 2022 +0000
+
+    udfps: Implement framework dimming support
+    
+    [Lynnrin]: Adapt for Android 12.1
+    
+    Change-Id: I64d660d74c77f0d3a419ad509d2d8ab7e3b5119e
+
+[33mcommit e0900a10cbbb2f29842754b5c2344d0095710a8e[m
+Author: Weijie Wang <quic_weijiew@quicinc.com>
+Date:   Tue Jul 26 18:15:54 2022 +0800
+
+    SystemUI: Lazy initialization FiveGServiceClient
+    
+    Change-Id: I5394b0b3af6b2339de972e0bc01c71dff36468b6
+    CRs-Fixed: 3256344
+
+[33mcommit 82fad17b7e5f4e5417a434b8816fe016e94f96b5[m
+Author: Daniel Jacob Chittoor <djchittoor47@gmail.com>
+Date:   Thu Jul 21 01:37:15 2022 +0530
+
+    SystemUI: Implement Reverse-engineered Smartspace
+    
+    From SQ3A.220605.009.A1
+    
+    [ghostrider-reborn]
+    - Adapt to aospa, fix crash on click, misc cleanup
+    
+    Change-Id: I39444dd95621ccfbe1dfd737e357145014e440d0
+    Co-authored-by: Adithya R <gh0strider.2k18.reborn@gmail.com>
+
+[33mcommit 24a2efb308c1c8a9b607a991a91312741d5f0f67[m
+Author: Juhyung Park <qkrwngud825@gmail.com>
+Date:   Tue Jul 26 12:42:20 2022 +0900
+
+    SystemUI: P404: add null check to mSmartSpaceController
+    
+    Fixes following crash:
+    
+    07-26 12:35:17.797 11648 11648 E AndroidRuntime: FATAL EXCEPTION: main
+    07-26 12:35:17.797 11648 11648 E AndroidRuntime: Process: com.android.systemui, PID: 11648
+    07-26 12:35:17.797 11648 11648 E AndroidRuntime: java.lang.RuntimeException: Unable to get provider co.aospa.android.systemui.keyguard.AospaKeyguardSliceProvider: java.lang.NullPointerException: Attempt to invoke virtual method 'void com.google.android.systemui.smartspace.SmartSpaceController.addListener(com.google.android.systemui.smartspace.SmartSpaceUpdateListener)' on a null object reference
+    07-26 12:35:17.797 11648 11648 E AndroidRuntime:        at android.app.ActivityThread.installProvider(ActivityThread.java:7505)
+    07-26 12:35:17.797 11648 11648 E AndroidRuntime:        at android.app.ActivityThread.installContentProviders(ActivityThread.java:7017)
+    07-26 12:35:17.797 11648 11648 E AndroidRuntime:        at android.app.ActivityThread.handleBindApplication(ActivityThread.java:6766)
+    07-26 12:35:17.797 11648 11648 E AndroidRuntime:        at android.app.ActivityThread.access$1500(ActivityThread.java:257)
+    07-26 12:35:17.797 11648 11648 E AndroidRuntime:        at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2092)
+    07-26 12:35:17.797 11648 11648 E AndroidRuntime:        at android.os.Handler.dispatchMessage(Handler.java:106)
+    07-26 12:35:17.797 11648 11648 E AndroidRuntime:        at android.os.Looper.loopOnce(Looper.java:201)
+    07-26 12:35:17.797 11648 11648 E AndroidRuntime:        at android.os.Looper.loop(Looper.java:288)
+    07-26 12:35:17.797 11648 11648 E AndroidRuntime:        at android.app.ActivityThread.main(ActivityThread.java:7911)
+    07-26 12:35:17.797 11648 11648 E AndroidRuntime:        at java.lang.reflect.Method.invoke(Native Method)
+    07-26 12:35:17.797 11648 11648 E AndroidRuntime:        at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:548)
+    07-26 12:35:17.797 11648 11648 E AndroidRuntime:        at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1009)
+    07-26 12:35:17.797 11648 11648 E AndroidRuntime: Caused by: java.lang.NullPointerException: Attempt to invoke virtual method 'void com.google.android.systemui.smartspace.SmartSpaceController.addListener(com.google.android.systemui.smartspace.SmartSpaceUpdateListener)' on a null object reference
+    07-26 12:35:17.797 11648 11648 E AndroidRuntime:        at co.aospa.android.systemui.keyguard.AospaKeyguardSliceProvider.onCreateSliceProvider(AospaKeyguardSliceProvider.java:43)
+    07-26 12:35:17.797 11648 11648 E AndroidRuntime:        at androidx.slice.SliceProvider.onCreate(SliceProvider.java:211)
+    07-26 12:35:17.797 11648 11648 E AndroidRuntime:        at android.content.ContentProvider.attachInfo(ContentProvider.java:2404)
+    07-26 12:35:17.797 11648 11648 E AndroidRuntime:        at android.content.ContentProvider.attachInfo(ContentProvider.java:2374)
+    07-26 12:35:17.797 11648 11648 E AndroidRuntime:        at androidx.slice.SliceProvider.attachInfo(SliceProvider.java:250)
+    07-26 12:35:17.797 11648 11648 E AndroidRuntime:        at androidx.slice.compat.SliceProviderWrapperContainer$SliceProviderWrapper.attachInfo(SliceProviderWrapperContainer.java:74)
+    07-26 12:35:17.797 11648 11648 E AndroidRuntime:        at android.app.ActivityThread.installProvider(ActivityThread.java:7500)
+    07-26 12:35:17.797 11648 11648 E AndroidRuntime:        ... 11 more
+    07-26 12:35:17.798  8868 11679 I DropBoxManagerService: add tag=system_app_crash isTagEnabled=true flags=0x2
+    07-26 12:35:17.798  8868  9506 W ActivityManager: Process com.android.systemui has crashed too many times, killing! Reason: crashed quickly
+    
+    Change-Id: Iecd2144b4a20783819df02c04af749d59ddef93a
+    Signed-off-by: Juhyung Park <qkrwngud825@gmail.com>
+
+[33mcommit 8e8b917dc19e8c26f3054a5ff805720aabe03ac5[m
+Author: jhonboy121 <alfredmathew05@gmail.com>
+Date:   Wed Dec 8 17:52:08 2021 +0530
+
+    SystemUI: UdfpsEnrollHelper: fix total steps not updating while enrolling
+    
+    Change-Id: Ia90f11bc88d81483cb65e581189c0cd001944c49
+    
+    Signed-off-by: jhonboy121 <alfredmathew05@gmail.com>
+    Change-Id: If891f0e2dc6c842b9d0fa000eb3ac2d225dfa93a
+
+[33mcommit 23e73f6a83822fcac65b30ad62720581fb8cd972[m
+Merge: 9b46e1caea3e 1d3746647d94
+Author: Linux Build Service Account <lnxbuild@localhost>
+Date:   Mon Aug 1 00:44:27 2022 -0700
+
+    Merge 1d3746647d940b665e276ecfda3155af188ae372 on remote branch
+    
+    Change-Id: I2c84bc711766093acafee063f2215cb1f7079d6f
+
+[33mcommit 71d40e6d9a566506b7f265e23caa767d211a123b[m
+Author: Sourajit Karmakar <sourajit@live.com>
+Date:   Wed Jun 22 11:57:24 2022 +0200
+
+    Use navigation handle dimens from Android 13 Beta 3
+    
+    Change-Id: I22e27ac483d3af138f4fa7c3866bbd4a314e2d33
+
+[33mcommit 643367b48760a6bc705e4066c33acdc2984fd352[m
+Author: Lang Yu <lyu80688@gmail.com>
+Date:   Wed Jan 26 15:27:59 2022 +0800
+
+    Fix BatteryStats counts foreground activity time.
+    
+    When an application crashes or ANRs in the foreground, or when the
+    application actively commits suicide in the foreground. It is often
+    impossible to switch to the PAUSED state of ActivityRecord. At this
+    time, the Timer in BatteryStats cannot be terminated, and it will keep
+    timing, which will eventually lead to errors in foreground activity time
+    statistics. So we'll settle in the handleAppDied function to fix that.
+    
+    Bug: 208355716
+    Change-Id: I23baf545105e0bb9322dc4a1702e38e0ef825c53
+    Signed-off-by: unknown <80264454@adc.com>
+
+[33mcommit 25c40da9d016c70cc7d23513f86c86e0a1c2ad82[m
+Author: Danny Lin <danny@kdrag0n.dev>
+Date:   Sun Dec 13 19:03:05 2020 -0800
+
+    base: Grant battery stats reset permission to Settings
+    
+    Change-Id: Iad153e0553ef076568537a51bd0d2855b27dd5ee
+
+[33mcommit 653a97cecfdffda03ba2b87c1fbdb70715ea3210[m
+Author: jhenrique09 <jhsv09@gmail.com>
+Date:   Fri May 13 20:57:27 2022 +0000
+
+    PixelProps: Update to May release
+    
+    Change-Id: I7b8a4ef66420123fef3322f1ca3e473a35b54425
+
+[33mcommit 3ee8ba1fdf0f96f73fd1f3ded8464d8753555ee9[m
+Merge: c18d2109183a 9b46e1caea3e
+Author: Akash Srivastava <akashniki@gmail.com>
+Date:   Tue Jul 19 04:33:07 2022 +0000
+
+    Merge tag 'LA.QSSI.12.0.r1-08300-qssi.0' of https://git.codelinaro.org/clo/la/platform/frameworks/base into HEAD
+
+[33mcommit a948dfcff1ef93e230e8e624ebc93a61a196de54[m
+Merge: 9c46c197364b c18d2109183a
+Author: Sugakesshaa <83747297+bheatleyyy@users.noreply.github.com>
+Date:   Tue Jul 19 08:52:12 2022 +0800
+
+    Merge branch 'P-404:shinka' into shinka
+
+[33mcommit c18d2109183a616f4d03b8715fc03ea086082e09[m
+Author: Dmitri Plotnikov <dplotnikov@google.com>
+Date:   Thu Dec 16 18:28:36 2021 -0800
+
+    Include saved battery history chunks into BatteryUsageStats parcel
+    
+    Bug: 209297031
+    Test: Test: atest FrameworksCoreTests:BatteryUsageStatsTest FrameworksCoreTests:BatteryUsageStatsProviderTest
+    Merged-In: I369d863b6f6fd488030aa031cc465bef6ce99ab8
+    Change-Id: Ifc70a49b731b5510e7bcd049e0c12d9ac7f68f44
+
+[33mcommit 81aa229bad76e086b525008be33338f0dcde230f[m
+Author: Dmitri Plotnikov <dplotnikov@google.com>
+Date:   Thu Dec 16 10:57:09 2021 -0800
+
+    Fix concurrency issue with BatteryUsageStats
+    
+    BatteryUsageStats is created under a BatteryStatsImpl lock.  One of
+    the elements of BatteryUsageStats is the battery history buffer Parcel.
+    Once the BatteryUsageStats object is created, the BatteryStatsImpl lock
+    is released and the history buffer parcel continues to be appended
+    by BatteryStatsImpl.  The Parcel may even be reset altogether if the
+    battery stats session is reset.  The BatteryUsageStats object is parceled
+    during the getBatteryUsageStats binder call. Any modification of the
+    history buffer concurrent with parceling causes a crash.
+    
+    Bug: 194256984
+    Test: atest FrameworksCoreTests:BatteryUsageStatsTest FrameworksCoreTests:BatteryUsageStatsProviderTest
+    Change-Id: I262c4608cd02943f926e8daaf3e782c6fe6eaee7
+    Merged-In: Ifb03a32275dfbea172cd28309a42349d6dd4bcd5
+
+[33mcommit 9c46c197364bb704656e92001ee02d6da24049d8[m
+Author: Adithya R <gh0strider.2k18.reborn@gmail.com>
+Date:   Thu May 12 19:46:16 2022 +0530
+
+    fixup! DozeSensors: Only use proximity sensor if supported
+    
+    On msm-4.14 devices, when the proximity sensor is in use,
+    the smp2p-sleepstate IRQ is fired multiple times a second,
+    with each one holding a 200ms wakelock.
+    This is probably a bug in the DSP firmware.
+    To fix this, avoid using the proximity sensor in doze mode,
+    because sleep is preferred to turning off the screen.
+    
+    Change-Id: I57750afd77267abdc49780f70636626d20e666ad
+    Signed-off-by: Adithya R <gh0strider.2k18.reborn@gmail.com>
+    
+    Revert "DozeSensors: only use proximity sensor if supported"
+    
+    This reverts commit b885970c1b5d82ac0ba0b67d87e2bd1965935a5c.
+
+[33mcommit 3f6ad257285c476752cd996db4b2cd6a932b5007[m
+Author: Adithya R <gh0strider.2k18.reborn@gmail.com>
+Date:   Sun May 15 14:02:57 2022 +0530
+
+    PixelPropsUtils: Add netflix to pixel spoofing list
+    
+     - Disabled spoofing by default, say, the device supports
+       Dolby Vision or has horrible (tinted) HDR, set
+       persist.pixelpropsutils.spoof_netflix to enable it.
+    
+    Signed-off-by: Karan Parashar <whyredfire@gmail.com>
+
+[33mcommit 2201d9eb9890ec468d71ff8cd1a406487577f768[m
+Author: Linux4 <tim@linux4.de>
+Date:   Mon Apr 20 17:57:43 2020 +0200
+
+    SystemUI: Add powershare QS tile
+    
+    Author: Linux4 <tim@linux4.de>
+    Date:   Mon Apr 20 17:57:43 2020 +0200
+    
+        base: SystemUI: add qs powershare tile
+    
+        Change-Id: Ibcf5cc3e766d971d9dca9242bf2770093d4d3099
+    
+    Author: Linux4 <tim@linux4.de>
+    Date:   Sat May 2 12:54:49 2020 +0200
+    
+        base: SystemUI: fix NPE in PowerShareTile
+    
+        Change-Id: If69846f3e3d4f3a12c0f78f47b5adc1008888de1
+    
+    Author: LuK1337 <priv.luk@gmail.com>
+    Date:   Tue Jul 7 13:27:12 2020 +0200
+    
+        SystemUI: Call setOnlyAlertOnce(true) for PowerShare notification
+    
+        * Otherwise we end up getting notification sound
+          every 20 seconds when using it...
+    
+        Change-Id: Ia56b01f332860b64f0d2c532884e6bcaa2acfb17
+    
+    Change-Id: Ia09a674745adb433f3aaeebfeb79899906350793
+
+[33mcommit b9008b1a197c364bcec8402efa5652e34559f440[m
+Author: Raj M <r.mamadgi@samsung.com>
+Date:   Wed Dec 1 08:24:32 2021 +0000
+
+    Change the wakeup alarms for "light-doze-maintenance step" to non-wakeup alarms
+    
+    The wakeup alarms for doze-light-maintenance steps are causing battery drain in idle state. In terms of idle state battery optimization, Doze light maintenance step alarms can be changed to non-wakeup alarms as verified it is not critical as well as there is no user impact during our tests over a 50 days of Samsung's internal testing including User Trial.
+    
+    Once it's changed to a non-wakeup alarm, the time gap between maintenance can be increased. But from our real test data, the gap has not increased as much as we worried, so doze-maintenance is working well.
+    
+    Merged-In: Ib9bf9e120c806e61eced99fbfb84cdb19d844e69
+    
+    Bug: b/197216833, b/185466339
+    Change-Id: Ida62842bdf8019563466fbf79326bc4d52ff3a99
+    Test: run `atest FrameworksMockingServicesTests:DeviceIdleControllerTest`
+
+[33mcommit 26b1762bd93642b675f808d48716e5256f267de4[m
+Author: LibXZR <i@xzr.moe>
+Date:   Sun Jun 19 22:19:47 2022 +0800
+
+    SystemUI: Fix suspicious spaces around mobile icons
+    
+    When dual SIM is in use, I could observe random but suspicious spaces
+    around mobile signal icons. This could happened especially after
+    expanding and collapsing the QS panel.
+    
+    This is caused by unmatched size between StatusBarMobileView and its
+    only child. More debugging deepening into the sdk is needed for me
+    to find out the real reason. I'm lazy, so let's bind the measurement
+    to its only child for a quick fix.
+    
+    Change-Id: Id6b4e38b31a9de5061ac332d319d313ecf11c177
+    Signed-off-by: LibXZR <i@xzr.moe>
+
+[33mcommit b1a4bb5408b10bcbe1a28035db6d5d13f201cc99[m
+Author: Jared Duke <jdduke@google.com>
+Date:   Fri Jun 10 16:19:57 2022 -0700
+
+    Immediately notify VM of TOP process state
+    
+    The delay was introduced to suppress JIT activity during startup.
+    However, ART no longer uses the expicit process state signal as an input
+    to informing JIT activity, so the delay can be removed.
+    
+    By forwarding the process state immediately, ART can make more informed
+    decisions about activity based on process state, e.g., suppressing
+    madvise calls for less important (non-foreground) processes.
+    
+    Bug: 235390330
+    Test: m + presubmit + boot tests
+    Change-Id: Ia95a76f86cf4c38bf89e56f954dbf59e0083ec50
+    Signed-off-by: Akash Srivastava <akashniki@gmail.com>
+
+[33mcommit f9b6398e228f82225f63b1056ea75b3d852b411d[m
+Author: Chilun <chilunhuang@google.com>
+Date:   Thu Dec 23 15:51:07 2021 +0800
+
+    Store pending override config instead of creating ActivityClientRecord
+    
+    Create ActivityClientRecord early in preExecute may cause
+    NullPointerException. If two LaunchActivityItem using the same token
+    and the 1st postExecute() comes after 2nd preExecute(), the
+    corresponding launching activity will be removed and cause 2nd
+    execute() get NullPointerException.
+    
+    Since the only use case to get ActivityClientRecord in preExecute() is
+    just to use it to store the pending override config. We can directly
+    store the latest pending override config from preExecute() in
+    ActivityThread instead of creating ActivityClientRecord.
+    
+    Bug: 201668069
+    Test: atest TransactionExecutorTests
+          atest ActivityThreadTest
+    Merged-In: If350e942254e54c9ec90bc63a6e50eb67d038183
+    Change-Id: If350e942254e54c9ec90bc63a6e50eb67d038183
+    Signed-off-by: Akash Srivastava <akashniki@gmail.com>
+
+[33mcommit e595603d020ffe03c0d5fe4a73b57010378d4b3b[m
+Author: Guanyou Chen <chenguanyou@xiaomi.com>
+Date:   Thu Feb 24 19:01:12 2022 +0000
+
+    [BugFix] acquireProvider maybe wait for timeout
+    
+    Test: manual
+    Change-Id: Iaeb951ad8dda333e660a66a138e2cc80f9dbd6a0
+    Signed-off-by: Akash Srivastava <akashniki@gmail.com>
+
+[33mcommit a941888d839709cc5e21b9c064b7ee6fc7d34c72[m
+Author: Siarhei Vishniakou <svv@google.com>
+Date:   Wed May 18 13:34:55 2022 -0700
+
+    Require CONFIG_HID_PLAYSTATION for DualSense key layout
+    
+    Some olders kernels don't yet support HID_PLAYSTATION. While they are
+    working on supporting this driver, provide this temporary solution.
+    
+    Before this patch, if the key layout is loaded, but there is no
+    HID_PLAYSTATION, then the mappings on the device will be incorrect.
+    
+    With this patch, this key layout will not be loaded unless there is a
+    CONFIG_HID_PLAYSTATION enabled on the device.
+    
+    Instead, when the main layout cannot be loaded, we make another attempt
+    to load a fallback layout. This way, the mappings on DualSense can be
+    correct even if the HID_PLAYSTATION module is not loaded.
+    
+    In this CL, the fallback layout was tested using controllerTester.
+    
+    Bug: 228005926
+    Test: tested mappings with a DualSense controller on a device that does
+    not have CONFIG_HID_PLAYSTATION
+    
+    Merged-In: I7e46ae1943cd2c63b8c0b03fdf5d71adeea89f6f
+    Change-Id: I7e46ae1943cd2c63b8c0b03fdf5d71adeea89f6f
+    Signed-off-by: Akash Srivastava <akashniki@gmail.com>
+
+[33mcommit f34299eac864a653db0ba390ba350cf4ba671148[m
+Author: idoybh <idoybh2@gmail.com>
+Date:   Fri Jul 15 17:05:04 2022 +0200
+
+    SystemUI: Show advanced when advanced reboot is on
+    
+    Change-Id: I1323fa91b995d8f684d00794fea05f6bfadc6977
+
+[33mcommit 9b46e1caea3e666973508df4f2013ec4a954bb8f[m
+Merge: b7042aa76a7b 331734faa0ae
+Author: Linux Build Service Account <lnxbuild@localhost>
+Date:   Thu Jul 14 12:30:36 2022 -0700
+
+    Merge 331734faa0ae2802e9c2a2976f39809ec4c85147 on remote branch
+    
+    Change-Id: Ibea30553ab2d5e6f4d7ede2a6de63e7616706879
+
+[33mcommit 4214ab1b5400105dec22d78ee6257bf084e9f72a[m
+Author: Ido Ben-Hur <idoybh2@gmail.com>
+Date:   Wed Dec 1 16:01:44 2021 +0200
+
+    base: AdvancedReboot: Add a button to restart SystemUI
+    
+    Drawable taken from our eleven brnach
+    
+    Change-Id: I0a025b31dbdf48f60dd9dd1a5c7416f06eb1b738
+    Signed-off-by: PainKiller3 <ninadpatil100@gmail.com>
+
+[33mcommit f07bc969b77ece46ba3990cfffd3f33b86147c74[m
+Author: mqi <mqi@codeaurora.org>
+Date:   Fri Jul 7 15:20:06 2017 +0800
+
+    SystemUI: Fix SystemUI Crash
+    
+    SystemUI may crash sometimes in monkey test due to exception.
+    
+    Catch the exception to avoid the crash.
+    
+    Change-Id: I548be5c6465f3c7a81c33d1cfa9b30e7269fd86d
+    CRs-Fixed: 2071086
+    Signed-off-by: Joe Maples <joe@frap129.org>
+    Signed-off-by: Pranav Vashi <neobuddy89@gmail.com>
+
+[33mcommit aa67083f3e2f94349e52482b97568b77c4e56fc9[m
+Author: Nauval Rizky <enuma.alrizky@gmail.com>
+Date:   Mon Dec 27 17:05:57 2021 +0700
+
+    SystemUI: Add support for GameSpace [1/2]
+    
+    This is an addon for GameSpace for broadcasting about game start/stop.
+    Additionally, it also has special option for suppressing fullscreen
+    intent like incoming call.
+    
+    This also squash commits:
+    - SystemUI: Improve GameSpace lifecycle and broadcast handling
+    - GameSpaceManager: Handle various case against "locking screen" scenario
+
+[33mcommit 27b2cb59becea8dbc6d1a4ec78ca702e87674ab2[m
+Author: Pranav Vashi <neobuddy89@gmail.com>
+Date:   Wed Jul 19 23:46:45 2017 +0530
+
+    base: Allow using 4G icon instead of LTE [1/2]
+    
+    Change-Id: Ieb912c64a60ddd42fe7b21d18dadea293ff159c5
+    Signed-off-by: clhex <clhexftw@protonmail.com>
+
+[33mcommit 1d3746647d940b665e276ecfda3155af188ae372[m
+Merge: 331734faa0ae 142be6bb998f
+Author: Android Build Coastguard Worker <android-build-coastguard-worker@google.com>
+Date:   Wed Jul 13 10:20:27 2022 +0000
+
+    Snap for 8825155 from 142be6bb998f09c98140befa1fa3fcd1293b46c7 to s-keystone-qcom-release
+    
+    Change-Id: I24267b4f24109943444b03ff5e60fb16623f9fe2
+
+[33mcommit 142be6bb998f09c98140befa1fa3fcd1293b46c7[m
+Merge: a346109f689c 91d954d096a1
+Author: Treehugger Robot <android-build-prod@system.gserviceaccount.com>
+Date:   Wed Jul 13 07:04:12 2022 +0000
+
+    Merge "Avoid duplicate unfreezeProcess" into s-keystone-qcom-dev
+
+[33mcommit a346109f689cfe3ebe406c0160adef623579f408[m
+Merge: ff3210f2f505 2c9ace396810
+Author: Treehugger Robot <android-build-prod@system.gserviceaccount.com>
+Date:   Wed Jul 13 07:04:09 2022 +0000
+
+    Merge "Fix race between WM launching app and AMS freezer" into s-keystone-qcom-dev
+
+[33mcommit ff3210f2f5058c720cf90c32fcec7c3e0da24c40[m
+Merge: 164e94d3e94b 0e9900fe709c
+Author: Treehugger Robot <android-build-prod@system.gserviceaccount.com>
+Date:   Wed Jul 13 07:04:06 2022 +0000
+
+    Merge "Freezer: skip killed app" into s-keystone-qcom-dev
+
+[33mcommit 164e94d3e94b0b118a41fb511c8cbbcb1327a5a1[m
+Merge: b56a248c2d16 166e3827c66b
+Author: Treehugger Robot <android-build-prod@system.gserviceaccount.com>
+Date:   Wed Jul 13 07:04:03 2022 +0000
+
+    Merge "Fix race between app crash and broadcast" into s-keystone-qcom-dev
+
+[33mcommit b56a248c2d1687ca048352bb85d60fac32ca8239[m
+Merge: e766ab421d5c 041ff883d870
+Author: Treehugger Robot <android-build-prod@system.gserviceaccount.com>
+Date:   Wed Jul 13 07:03:59 2022 +0000
+
+    Merge "Freezer: don't skip processes with file locks" into s-keystone-qcom-dev
+
+[33mcommit e766ab421d5c50e3c3c95a6a937c63e222b968a1[m
+Merge: fd9b5910c001 27d2348c0f4d
+Author: Treehugger Robot <android-build-prod@system.gserviceaccount.com>
+Date:   Wed Jul 13 07:03:55 2022 +0000
+
+    Merge "Freezer: check freeze binder ioctl" into s-keystone-qcom-dev
+
+[33mcommit 1fc11fa9bde9dbecc8889a2b9070b4f704feb472[m
+Merge: cc7f50d54984 b7042aa76a7b
+Author: Akash Srivastava <akashniki@gmail.com>
+Date:   Tue Jul 12 08:47:04 2022 +0700
+
+    Merge tag 'LA.QSSI.12.0.r1-08200-qssi.0' of https://git.codelinaro.org/clo/la/platform/frameworks/base into HEAD
+
+[33mcommit fd9b5910c001bd047fd112ecade94b41e5f6b3c7[m
+Author: Arvind Kumar <quic_c_karvin@quicinc.com>
+Date:   Mon Jul 11 11:11:55 2022 +0530
+
+    QSPA: Disable HeadlessLauncher for NonQSPA targets
+    
+    Disable HeadlessLauncher for NonQSPA targets
+    
+    CRs-Fixed: 3240324
+    
+    Change-Id: I466b983244b64992c41875e62e1db3e2a0aac12a
+
+[33mcommit cc7f50d549843af56ba52fb7d70ac3e7a5228165[m
+Author: Anay Wadhera <anay1018@gmail.com>
+Date:   Wed Jun 8 05:05:10 2022 +0900
+
+    SystemUI: fix wrong attributes for smartspace
+    
+    Change-Id: Ia6c1f9f65dc1f3602a0e5b359166ba8109856bb6
+    Reviewed-on: https://review.statixos.com/c/android_packages_apps_Statix_SystemUI/+/7891
+    Tested-by: Sourajit Karmakar <sourajit@live.com>
+    Reviewed-by: Sourajit Karmakar <sourajit@live.com>
+
+[33mcommit 430e6f3211431191124ad0374026be47afbd7e36[m
+Author: Anay Wadhera <awadhera@berkeley.edu>
+Date:   Tue Jun 7 10:16:46 2022 -0700
+
+    SystemUI: match Google resource class
+    
+    * Allow direct extraction from SystemUIGoogle
+    
+    Change-Id: Iafcaba0593f05ae4b20c9abefcd1f70570747754
+    Reviewed-on: https://review.statixos.com/c/android_packages_apps_Statix_SystemUI/+/7890
+    Tested-by: Sourajit Karmakar <sourajit@live.com>
+    Reviewed-by: Sourajit Karmakar <sourajit@live.com>
+
+[33mcommit 91d954d096a11e76a08ce22d12ce47eb5dfe701d[m
+Author: Li Li <dualli@google.com>
+Date:   Mon Mar 7 20:19:17 2022 -0800
+
+    Avoid duplicate unfreezeProcess
+    
+    There're multiple paths calling addToPendingTop. Check the uid/pid pair
+    to avoid calling unfreezeProcess multiple times.
+    
+    Bug: 213288355
+    CRs-Fixed: 3234175
+    
+    Test: no duplicate "quick sync unfreeze" msg in logcat
+    Change-Id: Ic9a9344faab6405c61e8b5b660e9202437dcac7d
+
+[33mcommit 2c9ace3968104766e356a7a2188eb6d98de6b9ee[m
+Author: Li Li <dualli@google.com>
+Date:   Thu Mar 3 11:05:39 2022 -0800
+
+    Fix race between WM launching app and AMS freezer
+    
+    If the next top activity is in cached and frozen mode, WM should raise
+    its priority to unfreeze it. This is done by calling AMS.updateOomAdj
+    that will lower its oom adj. However, WM cannot hold the AMS clock
+    here so the updateOomAdj operation is performed in a separate thread
+    asynchronously. Therefore WM can't guarantee AMS will unfreeze next top
+    activity on time. This race will fail the following binder transactions
+    WM sends to the activity. After this race issue between WM/ATMS and AMS
+    is solved, this workaround can be removed.
+    
+    Bug: 213288355
+    CRs-Fixed: 3234175
+    
+    Test: manual stress test, launching all installed apps in a loop
+    Change-Id: I8ac781ee3faf5711984dab22063083e93217d46e
+
+[33mcommit 0e9900fe709c36affa3a51aef01ee7318c4081e0[m
+Author: Li Li <dualli@google.com>
+Date:   Fri Jan 21 09:24:01 2022 -0800
+
+    Freezer: skip killed app
+    
+    It's not necessary to unfreeze an already killed app.
+    
+    Bug: 213395752
+    CRs-Fixed: 3234175
+    
+    Test: No "Unable to query binder frozen info for pid 0" in logcat.
+    Change-Id: I87f182031363065fde570ae99d04ed5dc0b31e4c
+
+[33mcommit 166e3827c66bd0a1975f96e0fc4d06bfe1040651[m
+Author: Li Li <dualli@google.com>
+Date:   Wed Jan 5 19:54:03 2022 -0800
+
+    Fix race between app crash and broadcast
+    
+    The original BroadcastQueue already had the mechanism to detect app
+    crash before actually sending the broadcast. But it still leaves a tiny
+    window that allows a rare race issue. The introduction of App Freezer
+    happens to hit this race issue if the frozen app receives an unexpected
+    sync binder call before a broadcast.
+    
+    Fix it by checking if the app is still alive immediately after sending
+    the broadcast to the receiver.
+    
+    Bug: 206145971
+    CRs-Fixed: 3234175
+    
+    Test: verify the killed app (by am due to sync binder call) is launched
+    again and receive the registered broadcast.
+    
+    Change-Id: I2f9edfb0d24f4d76018e3d241218d3e32fadede4
+
+[33mcommit 041ff883d870adf84a71f2c56b0b8659c4e3d0c5[m
+Author: Li Li <dualli@google.com>
+Date:   Tue Sep 21 15:05:08 2021 -0700
+
+    Freezer: don't skip processes with file locks
+    
+    To prevent deadlock, freezer had to skip all processes holding any file
+    locks. As SQLite is using exclusive locks, a lot of applications won't
+    be frozen. The new logic will detect the lock dependencies and only
+    unfreeze the processes that block others.
+    
+    This patch also adds a rewind() function to ProcFileReader class so that
+    ProcLocksReader doesn't open/close procfs nodes and create new instance
+    each time /proc/locks is parsed.
+    
+    Bug: 176927978
+    CRs-Fixed: 3234175
+    
+    Test: atest ProcFileReaderTest
+    Test: atest ProcLocksReaderTest
+    Test: verified processes with file locks could be frozen
+    Test: verified processes with blocking file locks were unfrozen
+    Change-Id: Ic2c89e6dcc9ee186840731c911be2aa3247b1352
+
+[33mcommit 27d2348c0f4da433c2c5081dbe0dd37a146d9f10[m
+Author: Li Li <dualli@google.com>
+Date:   Fri Sep 17 11:01:56 2021 -0700
+
+    Freezer: check freeze binder ioctl
+    
+    Some old kernels don't have the necessary binder ioctls for freezer
+    (BINDER_FREEZE & BINDER_GET_FROZEN_INFO). In such a case, disable
+    freezer with a warning log.
+    
+    Bug: 199803449
+    CRs-Fixed: 3234175
+    
+    Test: confirm freezer is enabled/disabled on new/old kernels
+    Change-Id: I9e19515746d4c415dc5eb871e2d3e232c0876a15
+
+[33mcommit a94ac30a6fd3c399b6218d214b3a84e160350b63[m
+Author: jhonboy121 <alfredmathew05@gmail.com>
+Date:   Tue Jul 5 01:08:12 2022 -0500
+
+    SystemUI: P404KeyguardSliceProvider: cleanup
+    
+    * Dropped AsyncTask and some other micro optimizations
+    Signed-off-by: jhonboy121 <alfredmathew05@gmail.com>
+
+[33mcommit b7042aa76a7bb60b9dd2a44a4558bb631f44cc5e[m
+Merge: e1627f5362f7 d9b68a9f5b63
+Author: Linux Build Service Account <lnxbuild@localhost>
+Date:   Thu Jun 30 04:23:05 2022 -0700
+
+    Merge d9b68a9f5b630d57a37a789034a6f5ca78e0d8fb on remote branch
+    
+    Change-Id: Ic20032d2fcdc7c0864d145907b633ca59a212968
+
+[33mcommit e1627f5362f7239a0e920876621300c564e35cbf[m
+Author: Thirupathi Reddy R <quic_treddyr@quicinc.com>
+Date:   Wed Jun 29 09:11:48 2022 +0530
+
+    Fixing code diff
+    
+    Change-Id: Ib1aee44ed6028dc16aa212e140dd510ee7f115eb
+
+[33mcommit c8f8db64a3be7a3ebe098c012aca1e01e163fa74[m
+Author: Chenyang Zhong <zhongcy95@gmail.com>
+Date:   Sun May 8 04:07:54 2022 -0400
+
+    DisplayPowerController: avoid updating settings when adjustment is NaN
+    
+    E AndroidRuntime: *** FATAL EXCEPTION IN SYSTEM PROCESS: PowerManagerService
+    E AndroidRuntime: java.lang.IllegalArgumentException: Invalid value: NaN for setting: screen_auto_brightness_adj
+    E AndroidRuntime:       at com.android.providers.settings.SettingsProvider.validateSystemSettingValue(SettingsProvider.java:1955)
+    E AndroidRuntime:       at com.android.providers.settings.SettingsProvider.mutateSystemSetting(SettingsProvider.java:1923)
+    E AndroidRuntime:       at com.android.providers.settings.SettingsProvider.insertSystemSetting(SettingsProvider.java:1843)
+    E AndroidRuntime:       at com.android.providers.settings.SettingsProvider.call(SettingsProvider.java:462)
+    E AndroidRuntime:       at android.content.ContentProvider.call(ContentProvider.java:2464)
+    E AndroidRuntime:       at android.content.ContentProvider$Transport.call(ContentProvider.java:512)
+    E AndroidRuntime:       at android.provider.Settings$NameValueCache.putStringForUser(Settings.java:2867)
+    E AndroidRuntime:       at android.provider.Settings$System.putStringForUser(Settings.java:3574)
+    E AndroidRuntime:       at android.provider.Settings$System.putStringForUser(Settings.java:3558)
+    E AndroidRuntime:       at android.provider.Settings$System.putFloatForUser(Settings.java:3859)
+    E AndroidRuntime:       at com.android.server.display.DisplayPowerController.putAutoBrightnessAdjustmentSetting(DisplayPowerController.java:2109)
+    E AndroidRuntime:       at com.android.server.display.DisplayPowerController.updatePowerState(DisplayPowerController.java:1263)
+    E AndroidRuntime:       at com.android.server.display.DisplayPowerController.access$700(DisplayPowerController.java:99)
+    E AndroidRuntime:       at com.android.server.display.DisplayPowerController$DisplayControllerHandler.handleMessage(DisplayPowerController.java:2438)
+    
+    Change-Id: Icb06aa8a2a72d6191be0b70b891bdac27a525fe3
+    Signed-off-by: Chenyang Zhong <zhongcy95@gmail.com>
+
+[33mcommit b61d317e732e2f39f759aeca1eb4289b7ef77cc6[m
+Author: Akash Srivastava <akashniki@gmail.com>
+Date:   Tue Jun 21 21:18:17 2022 +0700
+
+    OnTheSpot: Redesign snackbar for Android 12
+    
+    * The previous UI was from material design days. This has been redesigned for Material You!
+
+[33mcommit 878e94e0e14d92caed4c44c67e0dbc76dd82ef87[m
+Author: rituj <ritujbeniwal@gmail.com>
+Date:   Mon Mar 7 18:48:33 2022 +0530
+
+    SystemUI: Only listen for Quick pulldown gesture when the statusbar is collapsed
+    
+    * Fixes notification views not scrolling when this gesture is enabled
+    
+    Signed-off-by: rituj <ritujbeniwal@gmail.com>
+    Change-Id: Ifcb88baa83feb52efcc0c49a57739fe39921b592
+
+[33mcommit 7f7c7b686e917f5ab9d792eeda5f59c5183933ae[m
+Author: sigv <valterjansons@aospa.co>
+Date:   Thu Sep 15 08:47:44 2016 -0400
+
+    SystemUI: add quick settings pull down with one finger
+    
+    Contributors:
+    romanbb
+    oreiche
+    signal-v
+    parthipanramesh
+    thecrazyskull
+    
+    NotificationPanelView: update for new OTS change
+    
+    Change-Id: Ie0fa4d90484e8bcab9b928e4b4db6d76a0eb5423
+    
+    SystemUI: fix qs pulldown on certain themes
+    
+    Some themes define the peek height as 0, we should respect that and
+    allow the QS pulldown to still work.
+    
+    Ticket: CYNGNOS-2756
+    
+    Change-Id: I0404974a23ef41f4689c38ab86e3f09c4bb150ab
+    Signed-off-by: Roman Birg <roman@cyngn.com>
+    
+    SystemUI: fix multi touch gestures and extra jank
+    
+    The dejank utils were getting a little ahead of themselves: in between
+    the panel height being set to 0 (could happen often), and the user
+    actively trying to expand the panel, the next layout traversal from the
+    dejank utils would try to collapse the panel, causing bad states.
+    
+    Also in the qs height animator updater, be careful to only actively
+    update the end height when the user did not just peak.
+    
+    Finally, and most importantly, we need to disable motion event splitting
+    in our view that holds our notification panel logic so we can get multi
+    touch gestures in those views properly.
+    
+    Ticket: CYNGNOS-2756
+    Change-Id: I2cda440d4e0548d3477c6fad88f7dac1cb59d9db
+    Signed-off-by: Roman Birg <roman@cyngn.com>
+    
+    Quick pull-down: Do not override on keyguard
+    
+    If keyguard is showing, we should not override and intercept and
+    do all that magic. The quick settings will be what gets pulled
+    down first anyway in that case. Also, our current implementation
+    messes with swipes on keyguard itself if quick pull-down is
+    enabled, which is a "feature" we do not want.
+    
+    Change-Id: I8735887ffab6f2c5f23612b6fd04ed8d18270203
+    (cherry picked from commit 3257ac38f1f0606fb9c451572062d1988deb43d8)
+    
+    Quick pull-down: Clean up the touch interception
+    
+    This commit cleans up shouldQuickSettingsIntercept logics,
+    preferably once and for all.
+    
+    Change-Id: I5e4eedfcc7c5cb872f6f2b2e55c653cc90a8f25d
+    
+    Quick pull-down: Add logical magic for intercept
+    
+    Interception code is a weird part of the codebase. Sometimes it
+    works, more often than not, it doesn't. This is to fix an issue
+    which made the notifications not respond to touch.
+    
+    Additionally:
+    This reverts commit 94763e398b2056de0f7ac1dc692ad75ab8a43a4c.
+    
+    Change-Id: I0abec16b866bb93d667e932bfdfa2b0c7715c539
+    
+    Fix: Quickpulldown expand using notification view header
+    
+    At the moment you can't pull down the quick settings panel if quickpulldown is activated.
+    
+    Change-Id: Ifbb28aae3d1728488b4850c259135c8bb2d04d39
+    
+    OnTheSpot: Follow up for QS quick pull-down
+    
+    This commit fixes building errors caused by the recent change in
+    OnTheSpot frameworks by switching to the new methods.
+    
+    Change-Id: Iacd95a901d60a0a41fe1300696a004a701c84159
+    
+    SystemUI: Ignore collapsed state for quick pull down
+    
+    Change-Id: Ibd1cd3a46983f881b9eba20825df58345db9f668
+    
+    OnTheSpot: Make QS quick pull-down optional
+    
+    We are AOSP with adjustments and tweaks. Our goal is to have a UX
+    that is like AOSP, if the user does not want to experience the
+    tweaks. No big options screens, just little tweaks.
+    
+    This commit allows the user to choose to skip the Quick Settings quick
+    pull-down feature that provides a region on the side of the status bar
+    from which the Quick Settings panel can be expanded right away,
+    skipping the notifications listing screen.
+    
+    Change-Id: I98e0bd66249d7d9b6c11611a7d4dab2766d1034d
+    
+    SystemUI: Reduce activation area a bit of quick pulldown
+    
+    Change-Id: I06b3a50982930491c6fd4e70ceda3b1ceee28f87
+    
+    SystemUI: add quick settings pull down with one finger
+    
+    Logic is currently set to use 1/3 of right hand side of the statusbar to
+    trigger a quick settings quick pull down, quickly.
+    
+    @markakash: Forward-port to Shinka (Adapted for Android 12)
+    
+    Change-Id: I3f536496f724f07d2419a5b2db5fa8f8261609e7
+    Signed-off-by: Roman Birg <roman@cyngn.com>
+    
+    Change-Id: Id6b8ea8fdfedd649513753e0d6e3a52257f2a9b5
+    Signed-off-by: thecrazyskull <anaskarbila@aospa.co>
+    Signed-off-by: Alex Naidis <alex.naidis@linux.com>
+    Signed-off-by: Hernán Castañón <herna@paranoidandroid.co>
+    Signed-off-by: Akash Srivastava <akashniki@gmail.com>
